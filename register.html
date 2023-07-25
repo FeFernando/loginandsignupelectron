@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cadastro</title>
+</head>
+<body>
+  <h1>Cadastro</h1>
+  <input type="text" id="userNameInput" placeholder="Nome do Usuário">
+  <input type="password" id="passwordNameInput" placeholder="Senha">
+  <button id="saveButton">Cadastrar</button>
+
+  <script>
+    const { ipcRenderer } = require('electron');
+
+    const saveButton = document.getElementById('saveButton');
+
+    saveButton.addEventListener('click', () => {
+      const newUsername = document.getElementById('userNameInput').value;
+      const newPassword = document.getElementById('passwordNameInput').value;
+
+      ipcRenderer.send('saveUser', { newUsername, newPassword });
+    });
+
+    ipcRenderer.on('register-response', (event, response) => {
+      if (response.success) {
+        alert(response.message);
+        // Redireciona para a tela de login após o cadastro bem-sucedido
+        window.location.href = 'index.html';
+      } else {
+        alert(response.message);
+      }
+    });
+
+    ipcRenderer.on('saveUser-response', (event, response) => {
+      if (response.success) {
+        alert(response.message);
+        // Redireciona para a tela de login após o cadastro bem-sucedido
+        window.location.href = 'index.html';
+      } else {
+        alert(response.message);
+      }
+    });
+  </script>
+</body>
+</html>

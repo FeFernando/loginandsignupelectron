@@ -1,0 +1,15 @@
+{
+  "name": "banco",
+  "version": "1.0.0",
+  "description": "Um aplicativo Electron que usa SQLite para salvar nomes de carros.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Felipe",
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^13.6.9",
+    "sqlite3": "^5.0.2"
+  }
+}

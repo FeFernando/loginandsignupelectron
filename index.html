@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>App de Login</title>
+</head>
+<body>
+  <h1>Tela de Login</h1>
+  <form id="loginForm">
+    <label for="username">Usuário:</label>
+    <input type="text" id="username" name="username">
+    <br>
+    <label for="password">Senha:</label>
+    <input type="password" id="password" name="password">
+    <br>
+    <input type="submit" value="Entrar">
+  </form>
+  <p>Não possui uma conta? <a href="register.html">Cadastre-se</a></p>
+
+  <script>
+    const { ipcRenderer } = require('electron');
+
+    const loginForm = document.getElementById('loginForm');
+
+    loginForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      ipcRenderer.send('login', { username, password });
+    });
+
+    ipcRenderer.on('login-response', (event, response) => {
+      if (response.success) {
+        alert(response.message);
+        // Redireciona para a tela "home" após o login bem-sucedido
+        window.location.href = `home.html?username=${response.username}`;
+      } else {
+        alert(response.message);
+      }
+    });
+  </script>
+</body>
+</html>

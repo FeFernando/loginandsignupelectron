@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+</head>
+<body>
+    <p>Logado como: <span id="username"></span></p>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const username = params.get('username');
+
+      if (username) {
+        const usernameElement = document.getElementById('username');
+        usernameElement.textContent = username;
+      }
+    </script>
+</body>
+</html>
